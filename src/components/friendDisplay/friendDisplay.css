@@ -1,0 +1,41 @@
+.imgfollowflexxrowfr {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0px 10px;
+  /* border: 2px solid orangered; */
+  /* margin: 5px 0px; */
+}
+.frienduserinfoflexxrow {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 70%;
+  margin: 5px 0px;
+}
+.imgfollowflexxrowfr i {
+  font-size: 150%;
+}
+.flexxcolinfofruser a {
+  text-decoration: none;
+  color: inherit;
+}
+.dpfruserimg {
+  width: 15%;
+  margin: 10px 10px 10px 0px;
+  border-radius: 50%;
+  height: 40px;
+  display: block;
+  /* margin: 10px 0px; */
+}
+
+.flexxcolinfofruser {
+  display: flex;
+  flex-direction: column;
+}
+.flexxcolinfofruser p {
+  margin: 2px;
+}

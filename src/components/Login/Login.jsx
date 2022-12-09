@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import "./login.css";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [logincred, setLogincred] = useState({ email: "", password: "" });
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,6 +24,7 @@ const Login = () => {
       alert("Loggedin Successfully");
       localStorage.setItem("socialjwt", json.token);
       localStorage.setItem("socialuser", JSON.stringify(json.user));
+      navigate("/home");
       console.log(json);
     } catch (error) {
       alert("Couldn't Login");

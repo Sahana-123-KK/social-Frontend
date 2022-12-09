@@ -1,13 +1,54 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./profilecard.css";
 import dp from "../../images/dp.png";
 import bg from "../../images/bg.jpg";
-const ProfileCard = () => {
+import { Link, useLocation } from "react-router-dom";
+const ProfileCard = ({ type }) => {
+  const location = useLocation();
+  console.log(location);
+  let path = location.pathname.split("/")[2];
+  console.log(path);
+  const [profile, setProfile] = useState();
+
+  const getUserProfile = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:9000/api/users/getuser/${path}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(response);
+      const json = await response.json();
+      console.log(json);
+      setProfile(json?.profile);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    if (type === "mine") {
+      setProfile(JSON.parse(localStorage.getItem("socialuser")));
+    } else {
+      getUserProfile();
+    }
+  }, []);
   return (
     <div className="profilecardflexxcol">
-      <img src={bg} alt="" className="bgprofileimg" />
-      <img className="dpprofileimg" src={dp} alt="" />
-      <h4 className="profilename">Sahana Karthikeyani</h4>
+      <img
+        src={profile?.coverPic ? profile?.coverPic : bg}
+        alt=""
+        className="bgprofileimg"
+      />
+      <img
+        className="dpprofileimg"
+        src={profile?.profilePic ? profile?.profilePic : dp}
+        alt=""
+      />
+      <h4 className="profilename">{profile?.name}</h4>
       <div className="personinfoflexxcol">
         <div className="friendsflexxrow">
           <p className="friendsno">2 friends</p>
@@ -17,12 +58,12 @@ const ProfileCard = () => {
         <div className="locationflexxrow">
           <i class="bi bi-geo-alt"></i>
           &nbsp;
-          <span className="loc">Mumbai</span>
+          <span className="loc">{profile?.city} </span>
         </div>
         <div className="locationflexxrow">
           <i class="bi bi-briefcase"></i>
           &nbsp;
-          <span className="loc">Full Stack Developer</span>
+          <span className="loc">{profile?.job} </span>
         </div>
         <hr />
         <div className="editlinkflexxrow">
@@ -30,7 +71,10 @@ const ProfileCard = () => {
             <i class="bi bi-facebook"></i>
             &nbsp;
             <div className="flexxcolsocial">
-              <p className="typesocial">Facebook</p>
+              <a href={profile?.fbLink}>
+                <p className="typesocial">Facebook</p>
+              </a>
+
               <span className="loc">Social Network</span>
             </div>
           </div>
@@ -43,7 +87,9 @@ const ProfileCard = () => {
             <i class="bi bi-linkedin"></i>
             &nbsp;
             <div className="flexxcolsocial">
-              <p className="typesocial">Linked in</p>
+              <a href={profile?.instaLink}>
+                <p className="typesocial">Linked in</p>
+              </a>
               <span className="loc">Social Network</span>
             </div>
           </div>

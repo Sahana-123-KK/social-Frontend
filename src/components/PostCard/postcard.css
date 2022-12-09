@@ -1,0 +1,55 @@
+.postcardflexxcol {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  margin: 10px 0px;
+}
+.imgfollowflexxrow i {
+  font-size: 150%;
+}
+.dppostuserimg {
+  width: 20%;
+  margin: 10px 10px 10px 0px;
+  display: block;
+  border-radius: 50%;
+
+  /* margin: 10px 0px; */
+}
+.interactposticon {
+  width: 10%;
+
+}
+.flexxrowinteracitonpost {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 10px;
+  align-items: center;
+}
+.postimg {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+.imgfollowflexxrow {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.flexxcolinfopostuser {
+  display: flex;
+  flex-direction: column;
+}
+.flexxcolinfopostuser p {
+  margin: 2px;
+}
+.postuserinfoflexxrow {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 60%;
+}
