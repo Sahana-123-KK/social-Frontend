@@ -9,6 +9,7 @@ const ProfileCard = ({ type }) => {
   let path = location.pathname.split("/")[2];
   console.log(path);
   const [profile, setProfile] = useState();
+  const [friendsCount, setFriendsCount] = useState();
 
   const getUserProfile = async () => {
     try {
@@ -29,6 +30,29 @@ const ProfileCard = ({ type }) => {
       console.log(error);
     }
   };
+  const getFriendsFnc = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:9000/api/relation/getfriends",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            token: localStorage.getItem("socialjwt"),
+          },
+        }
+      );
+      console.log(response);
+      const json = await response.json();
+      setFriendsCount(json?.friends.length);
+      console.log(json);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getFriendsFnc();
+  }, []);
   useEffect(() => {
     if (type === "mine") {
       setProfile(JSON.parse(localStorage.getItem("socialuser")));
@@ -51,7 +75,7 @@ const ProfileCard = ({ type }) => {
       <h4 className="profilename">{profile?.name}</h4>
       <div className="personinfoflexxcol">
         <div className="friendsflexxrow">
-          <p className="friendsno">2 friends</p>
+          <p className="friendsno"> {friendsCount} friends</p>
           <i class="bi bi-person-fill-add"></i>
         </div>
         <hr />
