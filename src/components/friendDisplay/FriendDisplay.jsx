@@ -3,7 +3,8 @@ import "./friendDisplay.css";
 import dp from "../../images/dp.png";
 import { Link } from "react-router-dom";
 
-const FriendDisplay = ({ type, info }) => {
+const FriendDisplay = ({ type, info, is,state }) => {
+  console.log(is);
   const changeRelationFnc = async () => {
     try {
       const response = await fetch(
@@ -41,11 +42,13 @@ const FriendDisplay = ({ type, info }) => {
           <span className="userjob">{info?.job} </span>
         </div>
       </div>
-      {type === "friend" ? (
-        <i onClick={changeRelationFnc} class="bi bi-person-fill-dash"></i>
-      ) : (
-        <i onClick={changeRelationFnc} class="bi bi-person-fill-add"></i>
-      )}
+      {/* <h2>{!is && "i am here"} </h2> */}
+      {(is || state === "add") &&
+        (type === "friend" ? (
+          <i onClick={changeRelationFnc} class="bi bi-person-fill-dash"></i>
+        ) : (
+          <i onClick={changeRelationFnc} class="bi bi-person-fill-add"></i>
+        ))}
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import FriendDisplay from "../friendDisplay/FriendDisplay";
 import "./viewPeople.css";
-const ViewPeople = () => {
+const ViewPeople = ({ type, state }) => {
   const [people, setPeople] = useState([]);
   const viewPeople = async () => {
     try {
@@ -30,7 +30,7 @@ const ViewPeople = () => {
     <div className="friendslistflexxcol">
       <h5 className="headfrlist">People You May Know`</h5>
       {people.map((p, ind) => {
-        return <FriendDisplay type="people" info={p} />;
+        return <FriendDisplay state={state} is={type} type="people" info={p} />;
       })}
       {/* <FriendDisplay type="people" />
       <FriendDisplay type="people" />

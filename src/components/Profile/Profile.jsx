@@ -11,8 +11,8 @@ const Profile = ({ type }) => {
       <div className="flexxrowdivprofile">
         <PostsContainer type={type} />
         <div className="flexxcoldivprofile">
-          <FriendList />
-          <ViewPeople />
+          <FriendList type={type} />
+          <ViewPeople type={type} state="add" />
         </div>
       </div>
     </div>

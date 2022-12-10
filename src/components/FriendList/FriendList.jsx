@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import FriendDisplay from "../friendDisplay/FriendDisplay";
+import { Link, useLocation } from "react-router-dom";
+
 import "./friendlist.css";
-const FriendList = () => {
+const FriendList = ({ type }) => {
+  const location = useLocation();
+  let path = location.pathname.split("/")[2];
   const [friends, setFriends] = useState([]);
   const getFriendsFnc = async () => {
     try {
@@ -23,16 +27,42 @@ const FriendList = () => {
       console.log(error);
     }
   };
+
+  const getOthersFriends = async (req, res) => {
+    try {
+      const response = await fetch(
+        "http://localhost:9000/api/relation/getothersfriends",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            userId: path,
+          },
+        }
+      );
+      console.log(response);
+      const json = await response.json();
+      console.log(json);
+      setFriends(json?.friends);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
-    getFriendsFnc();
+    if (type === "mine") {
+      getFriendsFnc();
+    } else {
+      getOthersFriends();
+    }
   }, []);
+  console.log(type);
   return (
     <div className="friendslistflexxcol">
       <h5 className="headfrlist">Friends List</h5>
       {friends.length === 0
         ? "No Friends to Display"
         : friends.map((fr, ind) => {
-            return <FriendDisplay info={fr} type="friend" />;
+            return <FriendDisplay is={type} info={fr} type="friend" />;
           })}
       {/* <FriendDisplay type="friend" />
       <FriendDisplay type="friend" />
