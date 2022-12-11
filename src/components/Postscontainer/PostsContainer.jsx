@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 
 import Postinput from "../Postinput/Postinput";
 import "./postscontainer.css";
+import CommentComponent from "../CommentComponent/CommentComponent";
 const PostsContainer = ({ type }) => {
   const location = useLocation();
   // console.log(location);

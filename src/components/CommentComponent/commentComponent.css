@@ -1,0 +1,57 @@
+.commentcompflexxcol {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* padding: 5px; */
+  /* padding: 5px 15px; */
+  /* border: 2px solid cornflowerblue; */
+  background-color: white;
+  border-radius: 10px;
+}
+.delupcommflexxrow {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 50%;
+}
+.delupcommflexxrow i {
+  /* width: 40%; */
+  margin: 0px 10px;
+}
+.ownercommentflexxrow {
+  display: flex;
+  flex-direction: row;
+  margin-left: 23px;
+  width: 95%;
+  justify-content: space-between;
+}
+.commentedat {
+  padding: 0px 10px;
+  font-size: 80%;
+}
+.flexxcommentuserrow {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.commetername {
+  width: 80%;
+  margin: 0px;
+}
+.commentermess {
+  padding: 0px 10px;
+  margin-left: 23px;
+  /* font-size: small; */
+  font-size: 90%;
+}
+
+.commuserdp {
+  width: 8%;
+  margin-right: 10px;
+
+  /* width: 40px; */
+  height: 30px;
+  border-radius: 50%;
+}

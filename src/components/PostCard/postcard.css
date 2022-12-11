@@ -1,13 +1,19 @@
 .postcardflexxcol {
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 10px;
   background-color: white;
   border-radius: 10px;
   margin: 10px 0px;
 }
 .imgfollowflexxrow i {
   font-size: 150%;
+}
+.ownerpostintflexxrow{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 15%;
 }
 .dppostuserimg {
   width: 20%;

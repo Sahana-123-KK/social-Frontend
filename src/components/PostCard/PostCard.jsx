@@ -2,10 +2,17 @@ import React, { useEffect, useState } from "react";
 import "./postcard.css";
 import dp from "../../images/dp.png";
 import LeaveComment from "../LeaveComment/LeaveComment";
+import CommentComponent from "../CommentComponent/CommentComponent";
+import EditPost from "../EditPost/EditPost";
 
 const PostCard = ({ item }) => {
   const [comments, setComments] = useState([]);
+  const [editPost, setEditPost] = useState(false);
   // console.log(item);
+  const see = () => {
+    console.log("Nice");
+    setEditPost(!editPost);
+  };
   const changeRelationFnc = async () => {
     try {
       const response = await fetch(
@@ -91,6 +98,7 @@ const PostCard = ({ item }) => {
       );
       console.log(response);
       const json = await response.json();
+      setComments(json?.comments);
       console.log(json);
     } catch (error) {
       console.log(error);
@@ -117,36 +125,53 @@ const PostCard = ({ item }) => {
         </div>
         <i onClick={changeRelationFnc} class="bi bi-person-fill-dash"></i>
       </div>
-      <p className="postmessage">{item?.message} </p>
-      <img src={item?.pic} alt="" className="postimg" />
-      <div className="flexxrowinteracitonpost">
-        <div className="flexxrowviewerint">
-          <div className="flexxcollikes">
-            <i onClick={likePostFnc} class={`bi bi-heart interactposticon`}></i>
-            {item?.likeCount}
+
+      {editPost ? (
+        <EditPost set={setEditPost} item={item} />
+      ) : (
+        <>
+          <p className="postmessage">{item?.message} </p>
+          <img src={item?.pic} alt="" className="postimg" />
+          <div className="flexxrowinteracitonpost">
+            <div className="flexxrowviewerint">
+              <div className="flexxcollikes">
+                <i
+                  onClick={likePostFnc}
+                  class={`bi bi-heart interactposticon`}
+                ></i>
+                {item?.likeCount}
+              </div>
+              {/* <i class="bi bi-chat interactposticon "></i> */}
+            </div>
+            {item?.userid ===
+              JSON.parse(localStorage.getItem("socialuser"))._id && (
+              <div className="ownerpostintflexxrow">
+                <i onClick={deletePostFnc} class="bi bi-trash"></i>
+                <i onClick={see} class="bi bi-pen"></i>
+              </div>
+            )}
           </div>
-          <i class="bi bi-chat interactposticon "></i>
-        </div>
-        {item?.userid ===
-          JSON.parse(localStorage.getItem("socialuser"))._id && (
-          <i onClick={deletePostFnc} class="bi bi-trash"></i>
-        )}
-      </div>
-      <LeaveComment />
-      <div onClick={changeShow} className="headcomm">
-        <p>Comments</p>
-        {!showComm ? (
-          <i class="bi bi-caret-down-fill"></i>
-        ) : (
-          <i class="bi bi-caret-up-fill"></i>
-        )}
-      </div>
-      {showComm && (
-        <div className="showcommends">
-          {comments.map((item, ind) => {
-            return item?.message;
-          })}
-        </div>
+
+          <LeaveComment item={item} />
+          <div onClick={changeShow} className="headcomm">
+            <p>Comments</p>
+            {!showComm ? (
+              <i class="bi bi-caret-down-fill"></i>
+            ) : (
+              <i class="bi bi-caret-up-fill"></i>
+            )}
+          </div>
+
+          {showComm && (
+            <div className="showcommends">
+              {comments.length === 0
+                ? "No Comments To Display"
+                : comments.map((item, ind) => {
+                    return <CommentComponent item={item} />;
+                  })}
+            </div>
+          )}
+        </>
       )}
     </div>
   );
