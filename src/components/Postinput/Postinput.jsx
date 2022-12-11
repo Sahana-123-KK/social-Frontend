@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./postinput.css";
 import dp from "../../images/dp.png";
 import Filebase from "react-file-base64";
+import modeContext from "../../context/ModeContext";
 const Postinput = () => {
+  const { mode } = useContext(modeContext);
   const [post, setPost] = useState({
     message: "",
   });
@@ -32,7 +34,11 @@ const Postinput = () => {
     }
   };
   return (
-    <div className="flexxcolpostinput">
+    <div
+      className={
+        mode === "light" ? "flexxcolpostinput" : "flexxcolpostinputdark"
+      }
+    >
       <div className="flexxrowinputtext">
         <img
           src={JSON.parse(localStorage.getItem("socialuser"))?.profilePic}

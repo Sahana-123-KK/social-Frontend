@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./profilecard.css";
 import dp from "../../images/dp.png";
 import bg from "../../images/bg.jpg";
 import { Link, useLocation } from "react-router-dom";
+import modeContext from "../../context/ModeContext";
 const ProfileCard = ({ type }) => {
+  const { mode } = useContext(modeContext);
   const location = useLocation();
   console.log(location);
   let path = location.pathname.split("/")[2];
@@ -73,7 +75,11 @@ const ProfileCard = ({ type }) => {
         alt=""
       />
       <h4 className="profilename">{profile?.name}</h4>
-      <div className="personinfoflexxcol">
+      <div
+        className={
+          mode === "light" ? "personinfoflexxcol" : "personinfoflexxcoldark"
+        }
+      >
         <div className="friendsflexxrow">
           <p className="friendsno"> {friendsCount} friends</p>
           <i class="bi bi-person-fill-add"></i>

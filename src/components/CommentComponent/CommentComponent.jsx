@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import dp from "../../images/dp.png";
 import UpdateComment from "../UpdateComment/UpdateComment";
 import moment from "moment";
 import "./commentComponent.css";
+import modeContext from "../../context/ModeContext";
 const CommentComponent = ({ item }) => {
+  const { mode } = useContext(modeContext);
   const [show, setShow] = useState(false);
 
   const updateComment = () => {
@@ -30,7 +32,11 @@ const CommentComponent = ({ item }) => {
     }
   };
   return (
-    <div className="commentcompflexxcol">
+    <div
+      className={
+        mode === "light" ? "commentcompflexxcol" : "commentcompflexxcoldark"
+      }
+    >
       <div className="flexxcommentuserrow">
         <img src={item?.profilePic} alt="" className="commuserdp" />
         <p className="commetername">{item?.name} </p>

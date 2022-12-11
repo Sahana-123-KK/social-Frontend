@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./postcard.css";
 import dp from "../../images/dp.png";
 import LeaveComment from "../LeaveComment/LeaveComment";
 import CommentComponent from "../CommentComponent/CommentComponent";
 import EditPost from "../EditPost/EditPost";
+import modeContext from "../../context/ModeContext";
 
 const PostCard = ({ item }) => {
+  const { mode } = useContext(modeContext);
   const [comments, setComments] = useState([]);
   const [editPost, setEditPost] = useState(false);
   // console.log(item);
@@ -110,7 +112,9 @@ const PostCard = ({ item }) => {
   }, []);
   // console.log(item);
   return (
-    <div className="postcardflexxcol">
+    <div
+      className={mode === "light" ? "postcardflexxcol" : "postcardflexxcoldark"}
+    >
       <div className="imgfollowflexxrow">
         <div className="postuserinfoflexxrow">
           <img

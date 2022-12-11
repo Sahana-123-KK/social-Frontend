@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import modeContext from "../../context/ModeContext";
 import FriendDisplay from "../friendDisplay/FriendDisplay";
 import "./viewPeople.css";
 const ViewPeople = ({ type, state }) => {
+  const { mode } = useContext(modeContext);
   const [people, setPeople] = useState([]);
   const viewPeople = async () => {
     try {
@@ -27,7 +29,11 @@ const ViewPeople = ({ type, state }) => {
     viewPeople();
   }, []);
   return (
-    <div className="friendslistflexxcol">
+    <div
+      className={
+        (mode === "light" ? "friendslistflexxcol" : "friendslistflexxcoldark")
+      }
+    >
       <h5 className="headfrlist">People You May Know`</h5>
       {people.map((p, ind) => {
         return <FriendDisplay state={state} is={type} type="people" info={p} />;

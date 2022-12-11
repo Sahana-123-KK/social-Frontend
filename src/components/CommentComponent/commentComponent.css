@@ -8,6 +8,16 @@
   background-color: white;
   border-radius: 10px;
 }
+.commentcompflexxcoldark {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* padding: 5px; */
+  /* padding: 5px 15px; */
+  /* border: 2px solid cornflowerblue; */
+  background-color: #373737;
+  border-radius: 10px;
+}
 .delupcommflexxrow {
   display: flex;
   flex-direction: row;

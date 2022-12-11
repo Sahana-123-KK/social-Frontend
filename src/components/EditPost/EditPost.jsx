@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./editPost.css";
 import Filebase from "react-file-base64";
+import modeContext from "../../context/ModeContext";
 const EditPost = ({ set, item }) => {
+  const { mode } = useContext(modeContext);
   const [upPost, setUpPost] = useState({
     message: item?.message,
     pic: item?.pic,
@@ -34,7 +36,11 @@ const EditPost = ({ set, item }) => {
     }
   };
   return (
-    <div className="flexxcolpostinput">
+    <div
+      className={
+        mode === "light" ? "flexxcolpostinput" : "flexxcolpostinputdark"
+      }
+    >
       <div className="flexxrowinputtext">
         <img
           src={JSON.parse(localStorage.getItem("socialuser"))?.profilePic}

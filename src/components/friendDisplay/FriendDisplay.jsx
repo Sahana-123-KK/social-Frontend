@@ -3,7 +3,7 @@ import "./friendDisplay.css";
 import dp from "../../images/dp.png";
 import { Link } from "react-router-dom";
 
-const FriendDisplay = ({ type, info, is,state }) => {
+const FriendDisplay = ({ type, info, is, state }) => {
   console.log(is);
   const changeRelationFnc = async () => {
     try {
@@ -36,9 +36,11 @@ const FriendDisplay = ({ type, info, is,state }) => {
           alt=""
         />
         <div className="flexxcolinfofruser">
-          <Link to={`/profile/${info?._id}`}>
+          {/* <Link to={`/profile/${info?._id}`}> */}
+          <a href={`/profile/${info?._id}`}>
             <p className="frusername">{info?.name} </p>
-          </Link>
+          </a>
+          {/* </Link> */}
           <span className="userjob">{info?.job} </span>
         </div>
       </div>

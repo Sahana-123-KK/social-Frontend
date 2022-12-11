@@ -39,6 +39,15 @@
   border-radius: 10px;
   flex-direction: column;
 }
+.personinfoflexxcoldark {
+  display: flex;
+  background-color: #373737;
+
+  padding: 20px;
+  border-radius: 10px;
+  flex-direction: column;
+  color: white;
+}
 .flexxcolsocial {
   display: flex;
   margin: 0px 10px;

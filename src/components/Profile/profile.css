@@ -10,6 +10,19 @@
   overflow-y: auto;
   background-color: rgb(216, 216, 216);
 }
+.flexxcoldivprofiledark {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  /* border: 2px solid blue; */
+  border-radius: 10px;
+  width: 80vw;
+  margin: auto;
+  color: white;
+  height: 90vh;
+  overflow-y: auto;
+  background-color: #292929;
+}
 .flexxrowdivprofile {
   display: flex;
   flex-direction: row;
