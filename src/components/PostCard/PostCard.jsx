@@ -7,6 +7,7 @@ import EditPost from "../EditPost/EditPost";
 import modeContext from "../../context/ModeContext";
 
 const PostCard = ({ item }) => {
+  const [savedPosts, setSavedPosts] = useState([]);
   const { mode } = useContext(modeContext);
   const [comments, setComments] = useState([]);
   const [editPost, setEditPost] = useState(false);
@@ -110,6 +111,30 @@ const PostCard = ({ item }) => {
   useEffect(() => {
     getComments();
   }, []);
+
+  const savePost = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:9000/api/posts/saveposts",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            token: localStorage.getItem("socialjwt"),
+            postid: item?._id,
+          },
+        }
+      );
+      console.log(response);
+      const json = await response.json();
+      console.log(json);
+      setSavedPosts(json?.posts?.postsSaved);
+      alert("Post Saved Successfully");
+    } catch (error) {
+      alert("Couldn't Save");
+      console.log(error);
+    }
+  };
   // console.log(item);
   return (
     <div
@@ -152,6 +177,7 @@ const PostCard = ({ item }) => {
               <div className="ownerpostintflexxrow">
                 <i onClick={deletePostFnc} class="bi bi-trash"></i>
                 <i onClick={see} class="bi bi-pen"></i>
+                <i onClick={savePost} class="bi bi-bookmark"></i>
               </div>
             )}
           </div>
