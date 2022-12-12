@@ -1,7 +1,17 @@
 .flexxrowlogin {
   width: 60vw;
-  margin: auto;
+  margin: 20px auto;
   border: 2px solid tomato;
+
+  padding: 20px;
+  border-radius: 20px;
+}
+.flexxrowlogindark {
+  width: 60vw;
+  background-color: #373737;
+  color: white;
+  margin: 20px auto;
+  /* border: 2px solid tomato; */
   padding: 20px;
   border-radius: 20px;
 }

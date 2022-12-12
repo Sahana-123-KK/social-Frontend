@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./completeProfile.css";
 import Filebase from "react-file-base64";
+import modeContext from "../../context/ModeContext";
+import { Navigate, useNavigate } from "react-router-dom";
 const CompleteProfile = () => {
+  const { mode } = useContext(modeContext);
+  const navigate = useNavigate();
   const [completeProfile, setCompleteProfile] = useState({
     job: "",
     status: "",
@@ -36,13 +40,14 @@ const CompleteProfile = () => {
       console.log(json);
       localStorage.setItem("socialuser", JSON.stringify(json?.complete));
       alert("Profile Completed Successfully");
+      navigate("/home");
     } catch (error) {
       console.log(error);
       alert("Couldn't Update Profile");
     }
   };
   return (
-    <div className="flexxrowlogin">
+    <div className={mode === "light" ? "flexxrowlogin" : "flexxrowlogindark"}>
       <h1 className="loginhead">Complete Your Profile</h1>
       <form onSubmit={completeProfileFnc}>
         <div className="mb-3">
