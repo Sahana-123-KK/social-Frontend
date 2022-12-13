@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import modeContext from "../../context/ModeContext";
 import "./signup.css";
 const SignUp = () => {
@@ -79,10 +80,12 @@ const SignUp = () => {
             id="password"
           />
         </div>
-
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
+        <div className="flexxrowbtns">
+          <button type="submit" className="btn btn-primary">
+            Submit
+          </button>
+          <Link to="/login"> Already Have an Account</Link>
+        </div>
       </form>
     </div>
   );

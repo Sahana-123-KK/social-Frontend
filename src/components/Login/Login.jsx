@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import "./login.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import modeContext from "../../context/ModeContext";
 
 const Login = () => {
@@ -64,10 +64,12 @@ const Login = () => {
             id="password"
           />
         </div>
-
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
+        <div className="flexxrowbtns">
+          <button type="submit" className="btn btn-primary">
+            Submit
+          </button>
+          <Link to="/register">Create an Account</Link>
+        </div>
       </form>
     </div>
   );
