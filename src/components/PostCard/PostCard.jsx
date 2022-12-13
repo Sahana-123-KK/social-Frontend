@@ -6,14 +6,13 @@ import CommentComponent from "../CommentComponent/CommentComponent";
 import EditPost from "../EditPost/EditPost";
 import modeContext from "../../context/ModeContext";
 
-const PostCard = ({ item }) => {
-  const [savedPosts, setSavedPosts] = useState([]);
-  const { mode } = useContext(modeContext);
+const PostCard = ({ item, hide }) => {
+  // const [savedPosts, setSavedPosts] = useState([]);
+  const { mode, savedPosts, setSavedPosts } = useContext(modeContext);
   const [comments, setComments] = useState([]);
   const [editPost, setEditPost] = useState(false);
   // console.log(item);
   const see = () => {
-    console.log("Nice");
     setEditPost(!editPost);
   };
   const changeRelationFnc = async () => {
@@ -107,6 +106,16 @@ const PostCard = ({ item }) => {
       console.log(error);
     }
   };
+  const [booked, setBooked] = useState([]);
+  useEffect(() => {
+    setBooked(() => {
+      return savedPosts?.filter((post, ind) => {
+        return post?.postid === item?._id;
+      });
+    });
+  }, [savedPosts]);
+
+  console.log(booked);
 
   useEffect(() => {
     getComments();
@@ -136,6 +145,34 @@ const PostCard = ({ item }) => {
     }
   };
   // console.log(item);
+  const getmySavedPosts = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:9000/api/posts/getsavedposts",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            token: localStorage.getItem("socialjwt"),
+          },
+        }
+      );
+      console.log(response);
+      const json = await response.json();
+      console.log(json);
+      if (json?.posts === null) {
+        setSavedPosts([]);
+      } else {
+        setSavedPosts(json?.posts?.postsSaved);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getmySavedPosts();
+  }, []);
   return (
     <div
       className={mode === "light" ? "postcardflexxcol" : "postcardflexxcoldark"}
@@ -172,14 +209,26 @@ const PostCard = ({ item }) => {
               </div>
               {/* <i class="bi bi-chat interactposticon "></i> */}
             </div>
-            {item?.userid ===
-              JSON.parse(localStorage.getItem("socialuser"))._id && (
-              <div className="ownerpostintflexxrow">
-                <i onClick={deletePostFnc} class="bi bi-trash"></i>
-                <i onClick={see} class="bi bi-pen"></i>
+            {/* <i onClick={savePost} class="bi bi-bookmark"></i> */}
+
+            <div className="ownerpostintflexxrow">
+              {booked?.length === 0 ? (
                 <i onClick={savePost} class="bi bi-bookmark"></i>
-              </div>
-            )}
+              ) : (
+                <i onClick={savePost} class="bi bi-bookmark-fill"></i>
+              )}
+
+              {
+                // hide === "show" &&
+                item?.userid ===
+                  JSON.parse(localStorage.getItem("socialuser"))._id && (
+                  <>
+                    <i onClick={deletePostFnc} class="bi bi-trash"></i>
+                    <i onClick={see} class="bi bi-pen"></i>
+                  </>
+                )
+              }
+            </div>
           </div>
 
           <LeaveComment item={item} />

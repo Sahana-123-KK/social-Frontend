@@ -91,7 +91,7 @@ const PostsContainer = ({ type }) => {
             {otherPosts.map((item) => {
               return (
                 <>
-                  <PostCard item={item} />
+                  <PostCard hide={"show"} item={item} />
                 </>
               );
             })}

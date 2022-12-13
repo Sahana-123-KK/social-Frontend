@@ -1,0 +1,27 @@
+.dropdownflexxcol {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 50px;
+  padding: 8px;
+  border: 2px solid tomato;
+  border-radius: 10px;
+  background-color: white;
+}
+.dropdownflexxcoldark {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 50px;
+  padding: 8px;
+  border: 2px solid tomato;
+  border-radius: 10px;
+  background-color: #292929;
+  color: white;
+}
+.dropdownflexxcol a {
+  color: inherit;
+}
+.dropdownflexxcoldark a:hover {
+  color: white;
+}

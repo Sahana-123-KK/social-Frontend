@@ -1,0 +1,35 @@
+.flexxcolsavedposts {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  width: 80vw;
+  margin: 20px auto;
+  border-radius: 20px;
+  background-color: beige;
+  height: 85vh;
+  overflow-y: auto;
+}
+.flexxcolsavedpostsdark {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  width: 80vw;
+  margin: 20px auto;
+
+  border-radius: 20px;
+  background-color: #292929;
+
+  color: white;
+  height: 85vh;
+  overflow-y: auto;
+}
+.flexxcolpostssaved {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  /* flex-wrap: wrap; */
+}
+/* .flexxcolpostssaved div {
+  width: 40%;
+  margin: 10px;
+} */

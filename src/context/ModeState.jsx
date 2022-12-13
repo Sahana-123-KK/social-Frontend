@@ -7,6 +7,8 @@ const ModeState = (props) => {
   let lightMode = "light";
   //   { color: "black", backgroundColor: "white" };
   const [mode, setMode] = useState(lightMode);
+  const [savedPosts, setSavedPosts] = useState([]);
+
   const changeMode = (value) => {
     if (value === 0) {
       setMode(darkMode);
@@ -16,7 +18,9 @@ const ModeState = (props) => {
   };
 
   return (
-    <ModeContext.Provider value={{ changeMode, mode, setMode }}>
+    <ModeContext.Provider
+      value={{ changeMode, mode, setMode, savedPosts, setSavedPosts }}
+    >
       {props.children}
     </ModeContext.Provider>
   );

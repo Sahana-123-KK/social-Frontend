@@ -1,9 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./navbar.css";
 import ModeContext from "../../context/ModeContext";
 import { Link, useNavigate } from "react-router-dom";
+import Dropdownprofile from "../Dropdownprofile/Dropdownprofile";
 
 const Navbar = () => {
+  const [display, setDisplay] = useState(false);
+  const changeDisplay = () => {
+    setDisplay(!display);
+  };
   const navigate = useNavigate();
   const { mode, changeMode } = useContext(ModeContext);
   const logoutFnc = () => {
@@ -13,6 +18,7 @@ const Navbar = () => {
   };
   //   changeMode(0);
   console.log(mode);
+
   return (
     <div className={mode === "light" ? "flexxrownav" : "flexxrownavdark"}>
       {/* <img src="" alt="" className="logo" /> */}
@@ -44,10 +50,12 @@ const Navbar = () => {
           }
         ></i>
         <img
+          onClick={changeDisplay}
           src={JSON.parse(localStorage.getItem("socialuser"))?.profilePic}
           alt=""
           className="navuserdp"
         />
+        {display && <Dropdownprofile />}
         <span>{JSON.parse(localStorage.getItem("socialuser"))?.name}</span>
         <button onClick={logoutFnc} className="logoutbtn">
           {/* <i class="bi bi-box-arrow-right"></i> */}

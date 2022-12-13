@@ -21,8 +21,11 @@
 .ownerpostintflexxrow {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-end;
   width: 20%;
+}
+.ownerpostintflexxrow i {
+  margin: 0px 5px;
 }
 .dppostuserimg {
   width: 20%;
