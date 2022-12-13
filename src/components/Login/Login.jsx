@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./login.css";
 import { Link, useNavigate } from "react-router-dom";
 import modeContext from "../../context/ModeContext";
@@ -33,6 +33,11 @@ const Login = () => {
       console.log(error);
     }
   };
+  useEffect(() => {
+    if (localStorage.getItem("socialjwt")) {
+      navigate("/home");
+    }
+  }, []);
   return (
     <div className={mode === "light" ? "flexxrowlogin" : "flexxrowlogindark"}>
       <h1 className="loginhead">Login To Continue</h1>

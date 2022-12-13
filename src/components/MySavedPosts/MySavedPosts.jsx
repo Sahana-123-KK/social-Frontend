@@ -1,9 +1,12 @@
 import React, { useEffect, useState, useContext } from "react";
 import modeContext from "../../context/ModeContext";
 import PostCard from "../PostCard/PostCard";
+import { useNavigate } from "react-router-dom";
 import "./mysavedposts.css";
 const MySavedPosts = () => {
   const { savedPosts, mode } = useContext(modeContext);
+  const navigate = useNavigate();
+
   const [fullSavedPosts, setFullSavedPosts] = useState([]);
   const savedPostsFull = async () => {
     try {
@@ -26,7 +29,14 @@ const MySavedPosts = () => {
     }
   };
   useEffect(() => {
-    savedPostsFull();
+    if (!localStorage.getItem("socialjwt")) {
+      navigate("/login");
+    }
+  }, []);
+  useEffect(() => {
+    if (localStorage.getItem("socialjwt")) {
+      savedPostsFull();
+    }
   }, [savedPosts]);
   return (
     <div

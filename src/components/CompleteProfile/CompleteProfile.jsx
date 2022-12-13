@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "./completeProfile.css";
 import Filebase from "react-file-base64";
 import modeContext from "../../context/ModeContext";
@@ -19,6 +19,11 @@ const CompleteProfile = () => {
     const { name, value } = e.target;
     setCompleteProfile({ ...completeProfile, [name]: value });
   };
+  useEffect(() => {
+    if (!localStorage.getItem("socialjwt")) {
+      navigate("/login");
+    }
+  }, []);
 
   const completeProfileFnc = async (e) => {
     e.preventDefault();

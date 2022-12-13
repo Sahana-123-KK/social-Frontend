@@ -1,8 +1,9 @@
-import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import modeContext from "../../context/ModeContext";
 import "./signup.css";
 const SignUp = () => {
+  const navigate = useNavigate();
   const { mode } = useContext(modeContext);
   const [credentials, setCredentials] = useState({
     name: "",
@@ -35,6 +36,11 @@ const SignUp = () => {
       console.log(error);
     }
   };
+  useEffect(() => {
+    if (localStorage.getItem("socialjwt")) {
+      navigate("/home");
+    }
+  }, []);
   return (
     <div className={mode === "light" ? "flexxrowlogin" : "flexxrowlogindark"}>
       <h1 className="loginhead">SignUp To Continue</h1>
